@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinHub - Student Financial Advisor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f9c5d1, #c2a6ff);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            min-height: 90vh;
+        }
+
+        /* Landing Section */
+        .landing-section {
+            position: relative;
+            width: 100%;
+            min-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(156, 39, 176, 0.7), rgba(103, 58, 183, 0.7)), url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+            z-index: 1;
+        }
+
+        .highlight-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 60%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .landing-content {
+            position: relative;
+            z-index: 3;
+            color: white;
+            max-width: 800px;
+        }
+
+        .logo {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .tagline {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.3;
+        }
+
+        .tagline-highlight {
+            background: linear-gradient(45deg, #ffeb3b, #ff9800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .cta-button {
+            background: white;
+            color: #8e44ad;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 3;
+            position: relative;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Sign Up Section */
+        .signup-section {
+            display: none;
+            padding: 40px;
+            background: linear-gradient(to bottom, #f8bbd0, #e1bee7);
+            min-height: 90vh;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signup-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-title {
+            color: #8e44ad;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: #ab47bc;
+            outline: none;
+        }
+
+        .signup-button {
+            width: 100%;
+            background: linear-gradient(to right, #ab47bc, #7b1fa2);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .signup-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(123, 31, 162, 0.4);
+        }
+
+        .back-button {
+            margin-top: 20px;
+            background: transparent;
+            border: 2px solid #7b1fa2;
+            color: #7b1fa2;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: #7b1fa2;
+            color: white;
+        }
+
+        /* Chat Section */
+        .chat-section {
+            display: none;
+            flex-direction: column;
+            height: 90vh;
+            background: linear-gradient(to right, #f3e5f5, #e8eaf6);
+        }
+
+        .chat-header {
+            background: linear-gradient(to right, #ab47bc, #7b1fa2);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 15px;
+            border-radius: 15px;
+            line-height: 1.5;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background: white;
+            color: #333;
+            border-bottom-left-radius: 5px;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background: #7b1fa2;
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .input-area {
+            display: flex;
+            padding: 15px;
+            background: white;
+            gap: 10px;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        .send-button {
+            background: #7b1fa2;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .send-button:hover {
+            background: #ab47bc;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 3.5rem;
+            }
+            
+            .tagline {
+                font-size: 2rem;
+            }
+            
+            .highlight-overlay {
+                width: 90%;
+                height: 70%;
+            }
+            
+            .signup-form {
+                padding: 25px;
+            }
+            
+            .message {
+                max-width: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Landing Section -->
+        <section class="landing-section">
+            <div class="hero-image"></div>
+            <div class="highlight-overlay"></div>
+            <div class="landing-content">
+                <h1 class="logo">FinHub</h1>
+                <h2 class="tagline"><span class="tagline-highlight">Gastos gusto,</span> Budget ayaw?</h2>
+                <p class="quote">"Financial wisdom begins with understanding where your money goes - master this while you're young, and wealth will follow."</p>
+                <button class="cta-button" onclick="showSignUp()">Get Started - Sign Up</button>
+            </div>
+        </section>
+
+        <!-- Sign Up Section -->
+        <section class="signup-section" id="signupSection">
+            <div class="signup-form">
+                <h2 class="form-title">Create Your Account</h2>
+                <div class="input-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                </div>
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Create a password">
+                </div>
+                <div class="input-group">
+                    <label for="schoolLevel">School Level</label>
+                    <select id="schoolLevel">
+                        <option value="highschool">High School</option>
+                        <option value="seniorhigh">Senior High School</option>
+                    </select>
+                </div>
+                <button class="signup-button" onclick="showChat()">Sign Up</button>
+                <button class="back-button" onclick="showLanding()">Back to Home</button>
+            </div>
+        </section>
+
+        <!-- Chat Section -->
+        <section class="chat-section" id="chatSection">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <i class="fas fa-robot"></i>
+                    <h2>FinHub Advisor</h2>
+                </div>
+                <button class="back-button" onclick="showSignUp()">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="chat-container" id="chatContainer">
+                <div class="message bot-message">
+                    Hello! I'm FinHub, your financial advisor. How can I help you with money management today?
+                </div>
+            </div>
+            <div class="input-area">
+                <input type="text" class="message-input" id="messageInput" placeholder="Ask about money management...">
+                <button class="send-button" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Show different sections
+        function showLanding() {
+            document.querySelector('.landing-section').style.display = 'flex';
+            document.getElementById('signupSection').style.display = 'none';
+            document.getElementById('chatSection').style.display = 'none';
+        }
+
+        function showSignUp() {
+            document.querySelector('.landing-section').style.display = 'none';
+            document.getElementById('signupSection').style.display = 'flex';
+            document.getElementById('chatSection').style.display = 'none';
+        }
+
+        function showChat() {
+            const name = document.getElementById('name').value;
+            if (!name) {
+                alert('Please enter your name');
+                return;
+            }
+            
+            document.querySelector('.landing-section').style.display = 'none';
+            document.getElementById('signupSection').style.display = 'none';
+            document.getElementById('chatSection').style.display = 'flex';
+            
+            // Add personalized greeting
+            const chatContainer = document.getElementById('chatContainer');
+            const greeting = document.createElement('div');
+            greeting.className = 'message bot-message';
+            greeting.textContent = `Hello ${name}! I'm FinHub, your financial advisor. How can I help you with money management today?`;
+            chatContainer.appendChild(greeting);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Chat functionality
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message to chat
+            const chatContainer = document.getElementById('chatContainer');
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.textContent = message;
+            chatContainer.appendChild(userMessage);
+            
+            // Clear input
+            input.value = '';
+            
+            // Scroll to bottom
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            // Generate bot response after a short delay
+            setTimeout(() => {
+                generateResponse(message.toLowerCase());
+            }, 1000);
+        }
+
+        function generateResponse(message) {
+            const chatContainer = document.getElementById('chatContainer');
+            const botMessage = document.createElement('div');
+            botMessage.className = 'message bot-message';
+            
+            let response = '';
+            
+            if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+                response = "Hello! How can I help you with your finances today?";
+            } else if (message.includes('budget') || message.includes('manage money')) {
+                response = "As a student, you can budget your allowance by first knowing your total income each week or month. List all your regular expenses such as as food, transportation, and school supplies. Follow a simple rule like the 50/30/20 methood - 50% for needs, 30% for wants, and 20%for savings. Keep track of your spending to see where your money goes and avoid necessary purchases. Lastly, set a savings goal to motivate yourself to spepnd wosely and save regularly.";
+            } else if (message.includes('save') || message.includes('saving')) {
+                response = "Saving money ideas for students are creative and practical strategies that help young people become financially smart while balancing school expenses. These ideas encourage students to plan their spending carefully, find affortable alternatives for their needs, develop the habit of saving regularly. Simple actions like preparing meals at home, reusing school materials, joining discount programs, or setting aside small amounrs from their allowance can make a big difference. By practicing these habits, students not only save money but also learn valuable lessons in responsibility and financial independence.";
+            } else if (message.includes('earn') || message.includes('earn')) {
+                response = "Earning money ideas for students are innovative ways that allow learners to use their talents and free time to generate income while pursuing their education. Instead of relying solely on allowances, students can explore opportunities such as online freelancing, content creation, small business ventures, or offering academic help to peers. These activities not only provide extra financial support but also teach valuable lessons in time management, responsibility, and entrepreneurship. By learning how to earn at a young age, students build confidence and gain real-world experience that prepares them for future success.";
+            } else if (message.includes('debt') || message.includes('loan')) {
+                response = "Debt for students is the amount of money they owe after borrowing to support their education or personal expenses, which must be paid back over time, often with added interest. It can come from student loans, credit cards, or personal borrowing, and while it can provide short-term financial help, it also requires careful management to prevent long-term problems. Understanding how debt works teaches students discipline and financial awareness, helping them make smarter decisions about spending, saving, and borrowing responsibly as they prepare for their future.";
+            } else if (message.includes('investment') || message.includes('invest')) {
+                response = "Investment for students refers to the act of using their money, time, or resources to gain future benefits or profits. It doesn’t always mean putting large amounts into stocks or businesses—students can start small by saving in digital wallets, joining savings programs, or learning about financial markets. Investing also includes spending on self-improvement, such as education, skills training, or learning opportunities that can lead to better income in the future. By starting early, students develop a mindset of growth and responsibility, preparing them for long-term financial stability and success.";
+            } else {
+                response = "That's a good question about personal finance! As a student, focus on building good money habits: track spending, save regularly, and avoid unnecessary debt. What specific area are you concerned about?";
+            }
+            
+            botMessage.textContent = response;
+            chatContainer.appendChild(botMessage);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Allow sending message with Enter key
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
